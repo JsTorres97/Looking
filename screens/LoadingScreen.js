@@ -27,8 +27,8 @@ class LoadingScreen extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <ActivityIndicator size="large" />
+            <View style={[styles.container, styles.horizontal]}>
+            <ActivityIndicator size="large" color="#0000ff" />
             </View>
         );
     }
@@ -37,8 +37,12 @@ export default LoadingScreen;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
+      flex: 1,
+      justifyContent: 'center'
+    },
+    horizontal: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      padding: 10
     }
-});
+  });
