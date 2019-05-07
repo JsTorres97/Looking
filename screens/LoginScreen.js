@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { 
     View,
+    Image,
     Text,
     StyleSheet,
-    Button
+    Button,
+    AppRegistry
 } from "react-native";
 import * as firebase from 'firebase';
 import {firebaseConfig} from '../config/FirebaseConfig';
@@ -133,15 +135,18 @@ onSignIn = googleUser => {
     render() {
         return (
             <View style={styles.container}>
-                <Button title='Iniciar sesión con Google'
+             <Image    style={styles.logo}
+          source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Looking_HBO.jpg/800px-Looking_HBO.jpg'}}/>
+                <Button  style={styles.boton}
+                 title='Iniciar sesion con Google'
                         onPress={() => this.signInWithGoogleAsync()}/>
-                <Button style={{ marginTop: 10 }}
-          full
-          rounded
-          success
+              <Text>
+              {"\n"}
+              </Text>
+                <Button style={styles.boton}
+           title="Iniciar sesion con Facebook"
           onPress={() => this.loginWithFacebook()}
-          title="iniciar sesión con Facebook">
-          Entrar con Facebook
+         >
         </Button>
             </View>
         );
@@ -153,8 +158,22 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
+      flex: 1,
+      backgroundColor: 'white',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    boton: {
+      margin: 20, 
+      width: 200, 
+      height: 45,
+      padding: 10,
+      alignItems: 'center',
+    },
+    logo: {
+      alignItems: 'center',
+      width: 370,
+      height: 200,
+      marginTop: 10,
+  },
 });

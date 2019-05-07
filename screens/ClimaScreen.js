@@ -1,15 +1,33 @@
 import React, { Component } from "react";
-import { 
+
+import {
     View,
     Text,
-    StyleSheet
-} from "react-native";
+    StyleSheet,
+    ScrollView,
+    Image,
+    Button
+  } from "react-native";
+
+  import * as firebase from 'firebase';
+
+
 
 class ClimaScreen extends Component {
+    async LogoutFacebook(){
+        firebase.auth().signOut();
+    }
     render() {
         return (
             <View style={styles.container}>
-                <Text>ClimaScreen</Text>
+                <Button style={{ marginTop: 10 }}
+          full
+          rounded
+          success
+          onPress={() => this.LogoutFacebook()}
+          title="Cerrar sesión">
+          Cerrar Sesión
+        </Button>
             </View>
         );
     }
