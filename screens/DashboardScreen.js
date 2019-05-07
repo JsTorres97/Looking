@@ -5,6 +5,10 @@ import * as firebase from 'firebase';
 import CilmaScreen from "../screens/ClimaScreen";
 
 export default class Dashboard extends Component{
+
+    async LogoutFacebook(){
+        firebase.auth().signOut();
+    }
     render(){
         return(
             <View style={styles.container}>
@@ -21,6 +25,13 @@ export default class Dashboard extends Component{
         );
     }
 }
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
+});
 
 
 
