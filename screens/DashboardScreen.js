@@ -1,22 +1,12 @@
 import React, { Component } from "react";
-import { 
-    View,
-    Text,
-    StyleSheet,
-    Button
-} from "react-native";
+import { View, Text, StyleSheet, Button, TouchableHighlight, Image } from "react-native";
+import { DrawerNavigator } from 'react-navigation'; 
 import * as firebase from 'firebase';
-import {firebaseConfig} from '../config/FirebaseConfig';
+import CilmaScreen from "../screens/ClimaScreen";
 
-class DashboardScreen extends Component {
-
-    async LogoutFacebook(){
-        firebase.auth().signOut();
-    }
-    
-
-    render() {
-        return (
+export default class Dashboard extends Component{
+    render(){
+        return(
             <View style={styles.container}>
                 <Text>DashboardScreen</Text>
                 <Button style={{ marginTop: 10 }}
@@ -27,16 +17,25 @@ class DashboardScreen extends Component {
           title="Cerrar sesión">
           Cerrar Sesión
         </Button>
-            </View>
+        </View>
         );
     }
 }
-export default DashboardScreen;
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
-});
+
+
+ {/* <View style={styles.container}>
+                <Text>DashboardScreen</Text>
+                <Button style={{ marginTop: 10 }}
+          full
+          rounded
+          success
+          onPress={() => this.LogoutFacebook()}
+          title="Cerrar sesión">
+          Cerrar Sesión
+        </Button>
+        </View>*/}
+
+         {/* async LogoutFacebook(){
+        firebase.auth().signOut();
+    }*/}
