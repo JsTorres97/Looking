@@ -11,6 +11,7 @@ import {
   import * as firebase from 'firebase';
 import NoticiasScreen from "../screens/NoticiasScreen";
 import ClimaScreen from "../screens/ClimaScreen";
+import LogOut from '../screens/LogOut';
 
 export default class DashboardScreen extends Component{
     async Logout(){
@@ -20,7 +21,6 @@ export default class DashboardScreen extends Component{
     render() {
         return (
           <Dnavigator />
-          
         )
     }
 
@@ -38,11 +38,15 @@ const CustomDrawerContentComponent = (props) => (
             source={require('../assets/travel.png')} />
             
         </Body>
+        
       </Header>
       <Content>
+      
         <DrawerItems {...props} />
-        
+       
+      
       </Content>
+      
       
   
     </Container>
@@ -53,10 +57,13 @@ const MyApp = createDrawerNavigator({
 
     // For each screen that you can navigate to, create a new entry like this:
     Home: {
-      screen: ClimaScreen,
+      screen: ClimaScreen
     },
     Noticias: {
       screen: NoticiasScreen
+    },
+    'Cerrar sesión':{
+      screen: LogOut
     }
   },    
     {
@@ -87,6 +94,7 @@ const MyApp = createDrawerNavigator({
       width: 150,
       borderRadius: 75
     }
+   
   
   })
   
