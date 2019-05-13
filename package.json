@@ -9,6 +9,7 @@
   "dependencies": {
     "expo": "^32.0.0",
     "firebase": "^5.11.0",
+    "moment": "^2.24.0",
     "native-base": "^2.12.1",
     "native-navigation": "^0.2.1",
     "react": "16.5.0",
