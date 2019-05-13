@@ -11,6 +11,7 @@ import {
   import * as firebase from 'firebase';
 import NoticiasScreen from "../screens/NoticiasScreen";
 import ClimaScreen from "../screens/ClimaScreen";
+import PerfilScreen from '../screens/PerilScreen'
 import LogOut from '../screens/LogOut';
 
 export default class DashboardScreen extends Component{
@@ -56,7 +57,10 @@ const CustomDrawerContentComponent = (props) => (
 const MyApp = createDrawerNavigator({
 
     // For each screen that you can navigate to, create a new entry like this:
-    Home: {
+    Home:{
+      screen: PerfilScreen
+    },
+    'Consulta el clima': {
       screen: ClimaScreen
     },
     Noticias: {
