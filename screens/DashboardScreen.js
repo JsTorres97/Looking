@@ -11,7 +11,8 @@ import {
   import * as firebase from 'firebase';
 import NoticiasScreen from "../screens/NoticiasScreen";
 import ClimaScreen from "../screens/ClimaScreen";
-import PerfilScreen from '../screens/PerilScreen'
+import PerfilScreen from '../screens/PerilScreen';
+import ActividadesScreen from '../screens/ActividadesScreen';
 import LogOut from '../screens/LogOut';
 
 export default class DashboardScreen extends Component{
@@ -65,6 +66,9 @@ const MyApp = createDrawerNavigator({
     },
     Noticias: {
       screen: NoticiasScreen
+    },
+    Actividades:{
+      screen: ActividadesScreen
     },
     'Cerrar sesión':{
       screen: LogOut
