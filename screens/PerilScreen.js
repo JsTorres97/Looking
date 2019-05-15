@@ -6,8 +6,42 @@ import {
     Image,
   } from 'react-native';
 import * as firebase from 'firebase';
+import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+import { Permissions, Location } from 'expo';
 
 class PerfilScreen extends Component {
+
+    state = {
+        mapRegion: null,
+        hasLocationPermissions: false,
+        locationResult: null
+      };
+    
+      componentDidMount() {
+        this._getLocationAsync();
+      }
+    
+      _handleMapRegionChange = mapRegion => {
+        console.log(mapRegion);
+        this.setState({ mapRegion });
+      };
+    
+      _getLocationAsync = async () => {
+       let { status } = await Permissions.askAsync(Permissions.LOCATION);
+       if (status !== 'granted') {
+         this.setState({
+           locationResult: 'Permission to access location was denied',
+         });
+       } else {
+         this.setState({ hasLocationPermissions: true });
+       }
+    
+       let location = await Location.getCurrentPositionAsync({});
+       this.setState({ locationResult: JSON.stringify(location) });
+       
+       // Center the map on the location we just fetched.
+        this.setState({mapRegion: { latitude: location.coords.latitude, longitude: location.coords.longitude, latitudeDelta: 0.0922, longitudeDelta: 0.0421 }});
+      };
     
     render() {
         return (
@@ -20,8 +54,16 @@ class PerfilScreen extends Component {
             <View style={styles.bodyContent}>
               <Text style={styles.name}>{firebase.auth().currentUser.displayName}</Text>
               <Text style={styles.info}>{firebase.auth().currentUser.providerData[0].email}</Text>
-              
+              <Text style={styles.description}>Bienvenido a Looking</Text>
+              <MapView
+              style={{ alignSelf: 'stretch', height: 400 }}
+              region={this.state.mapRegion}
+              onRegionChange={this._handleMapRegionChange}
+              showsUserLocation
+            />
+           
             </View>
+            
         </View>
       </View>
         );
@@ -84,4 +126,8 @@ const styles = StyleSheet.create({
         borderRadius:30,
         backgroundColor: "#00BFFF",
       },
+      map: {
+        height: 400,
+        marginTop: 80
+     }
 });
