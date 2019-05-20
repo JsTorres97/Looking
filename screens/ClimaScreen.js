@@ -88,7 +88,7 @@ class ClimaScreen extends Component {
 					imageStyle={styles.image}
 				>
 					<SearchInput
-						placeholder="Select a City"
+						placeholder="Selecciona una ciudad"
 						onSubmit={this.handleUpdateLocation}
 					/>
 					<View style={styles.cards}>

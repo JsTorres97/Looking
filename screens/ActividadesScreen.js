@@ -4,20 +4,24 @@ import {
     Text,
     StyleSheet,
     StatusBar,
-    ListView
+    ListView,
+    ImageBackground
 } from "react-native";
 import { Container, Content, Header, Form, Input, Item, Button, Label, Icon, List, ListItem } from 'native-base';
 import * as firebase from 'firebase';
-import firebaseConfig from '../config/FirebaseConfig';
 var data=[]
 
+
+
 class ActividadesScreen extends Component {
+    
 
     constructor(props){
         super(props);
         this.ds = new ListView.DataSource({rowHasChanged: (r1,r2)=>r1 !== r2})
 
         this.state = {
+            usuarioid:firebase.auth().currentUser.uid,
             listViewData: data,
             newContact: ""
         }
@@ -34,7 +38,7 @@ class ActividadesScreen extends Component {
 
     addRow(data){
         var key = firebase.database().ref('/actividades').push().key
-        firebase.database().ref('/actividades').child(key).set({name:data})
+        firebase.database().ref('/actividades').child(key).set({name:data, usuarioid:firebase.auth().currentUser.uid})
 
     }
 
@@ -54,30 +58,43 @@ class ActividadesScreen extends Component {
 
     }
     
+    
     render() {
+
+        
+
         return (
-            <Container style={styles.container}>
-                <Header style={{marginTop:StatusBar.currentHeight}}>
-                <Text style={styles.text}>Organiza tu viaje</Text>
+            <ImageBackground
+            source={require("../assets/plan.jpg")}
+            style={styles.container}>
+              <View 
+               style={{
+                flex: 1,
+                justifyContent: 'center',
+                paddingHorizontal: 10,
+            }}
+            >
+                <Header style={styles.headtop}>
                     <Content>
-                        <Item>
-                            <Input
+                        <Item style={styles.boton}>
+                            <Input style={styles.text}
                                 onChangeText={(newContact) => this.setState({newContact})}
                                 placeholder="Agregar Actividad"
                             />
-                            <Button onPress={()=>this.addRow(this.state.newContact)}>
-                                <Icon name="add"/>
+                            <Button style={styles.botons}
+                            onPress={()=>this.addRow(this.state.newContact)}>
+                                <Icon  name="add"/>
                             </Button>
                         </Item>
                     </Content>
                 </Header>
                 <Content>
-                    <List
+                <List
                         enableEmptySections
                         dataSource={this.ds.cloneWithRows(this.state.listViewData)}
                         renderRow={data=>
                             <ListItem>
-                                <Text>{data.val().name}</Text>
+                                <Text style={styles.texto}>{data.val().name}</Text>
                             </ListItem>
                         }
                         renderRightHiddenRow={(data, secId, rowId, rowMap) =>
@@ -88,7 +105,8 @@ class ActividadesScreen extends Component {
                         rightOpenValue={-75}
                     />
                 </Content>
-            </Container>
+            </View>
+            </ImageBackground>
         );
     }
 }
@@ -97,9 +115,32 @@ export default ActividadesScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor:'#fff',
-    },
+        justifyContent: 'center',
+        paddingHorizontal: 10,
+  
+      },
     text:{
-        justifyContent: 'center'
-    }
+        fontSize: 14,
+        color: 'black',
+        justifyContent: 'center',
+    },
+    texto:{
+        fontSize: 16,
+        paddingHorizontal: 15,
+        color: 'black',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+
+    },
+    boton:{
+        backgroundColor: 'white',
+      },
+    botons:{
+        backgroundColor: 'gray',
+      },
+    headtop:{
+        marginTop:StatusBar.currentHeight,
+        backgroundColor: 'white',
+    },
 });

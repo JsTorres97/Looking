@@ -13,6 +13,7 @@ import NoticiasScreen from "../screens/NoticiasScreen";
 import ClimaScreen from "../screens/ClimaScreen";
 import PerfilScreen from '../screens/PerilScreen';
 import ActividadesScreen from '../screens/ActividadesScreen';
+import DistanciasScreen from '../screens/DistanciasScreen';
 import LogOut from '../screens/LogOut';
 
 export default class DashboardScreen extends Component{
@@ -66,6 +67,9 @@ const MyApp = createDrawerNavigator({
     },
     Noticias: {
       screen: NoticiasScreen
+    },
+    'Distancias a destinos populares': {
+      screen: DistanciasScreen
     },
     Actividades:{
       screen: ActividadesScreen

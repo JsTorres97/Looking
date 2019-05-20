@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { 
-    View,
-    Image,
-    Text,
-    StyleSheet,
-    Button,
-    AppRegistry
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ImageBackground,
+  Button,
+  AppRegistry
 } from "react-native";
 import * as firebase from 'firebase';
 import {firebaseConfig} from '../config/FirebaseConfig';
@@ -132,48 +134,73 @@ onSignIn = googleUser => {
         }
     
     
-    render() {
-        return (
-            <View style={styles.container}>
-             <Image    style={styles.logo}
-          source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Looking_HBO.jpg/800px-Looking_HBO.jpg'}}/>
-                <Button  style={styles.boton}
-                 title='Iniciar sesion con Google'
-                        onPress={() => this.signInWithGoogleAsync()}/>
-              <Text>
-              {"\n"}
-              </Text>
-                <Button style={styles.boton}
-           title="Iniciar sesion con Facebook"
-          onPress={() => this.loginWithFacebook()}
-         >
-        </Button>
-            </View>
-        );
-    }
-}
-
-
-export default LoginScreen;
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
+        render() {
+          return (
+            <ImageBackground
+            source={require("../assets/look.jpg")}
+            style={styles.container}>
+              <View 
+               style={{
+                flex: 1,
+                justifyContent: 'center',
+                paddingHorizontal: 10,
+            }}
+            >
+               <Image    style={styles.logo}
+            source={require("../assets/logo2.png")}/>
+             <TouchableOpacity
+           style={styles.button}
+           onPress={() => this.signInWithGoogleAsync()}       >
+           <Text style={[styles.texto]}> Iniciar sesión con Google </Text>
+         </TouchableOpacity>
+                <Text>
+                {"\n"}
+                </Text>
+                <TouchableOpacity
+           style={styles.button}
+           onPress={() => this.loginWithFacebook()}>
+            <Text style={[styles.texto] }> Iniciar sesión con Facebook </Text>
+         </TouchableOpacity>
+              </View>
+              </ImageBackground>
+          );
+      }
+  }
+  
+  
+  export default LoginScreen;
+  
+  const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        justifyContent: 'center',
+        paddingHorizontal: 10,
+  
+      },
+      logo: {
+      width: null,
+      resizeMode: 'contain',
+      height: 220
+    },
+    button: {
+      shadowColor: 'rgba(0,0,0, .4)', // IOS
+      shadowOffset: { height: 1, width: 1 }, // IOS
+      shadowOpacity: 1, // IOS
+      shadowRadius: 1, //IOS
       backgroundColor: 'white',
+      borderRadius: 15,
+      borderWidth: 1,
+      borderColor:'#2196F3',
+      elevation: 2, // Android
+      height: 60,
+      justifyContent: 'center',
       alignItems: 'center',
-      justifyContent: 'center'
+      flexDirection: 'row',
+  
     },
-    boton: {
-      margin: 20, 
-      width: 200, 
-      height: 45,
-      padding: 10,
-      alignItems: 'center',
+    texto: {
+      padding: 20,
+      fontSize: 18,
+      color: '#2196F3'
     },
-    logo: {
-      alignItems: 'center',
-      width: 370,
-      height: 200,
-      marginTop: 10,
-  },
-});
+  });
