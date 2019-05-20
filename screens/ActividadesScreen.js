@@ -29,10 +29,10 @@ class ActividadesScreen extends Component {
 
     componentDidMount(){
         var that = this 
-        firebase.database().ref('/actividades').on('child_added',function(data){
-            var newData = [...that.state.listViewData]
-            newData.push(data)
-            that.setState({listViewData: newData})
+        firebase.database().ref('/actividades/').on('child_added',function(data){
+                var newData = [...that.state.listViewData]
+                newData.push(data)
+                that.setState({listViewData: newData})
         })
     }
 
